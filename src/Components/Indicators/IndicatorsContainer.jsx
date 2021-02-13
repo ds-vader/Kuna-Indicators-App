@@ -9,11 +9,18 @@ class IndicatorsContainer extends React.Component{
         this.props.getIndicators();
     }
 
+    pairForRequest = (pair) =>{
+        //prepare info for getCurrentPrice func 
+        return pair.match(/[A-Z]+/gi).join('')
+    }
+
+
     render(){
         return <>
             <Indicators indicators={this.props.indicators}
                         deleteIndicator={this.props.deleteIndicator}
                         addNewIndicator={this.props.addNewIndicator}
+                        pairForRequest={this.pairForRequest}
             />
         </>
     }

@@ -4,11 +4,13 @@ import { ArrowUp, ArrowDown, XCircleFill } from 'react-bootstrap-icons';
 import NewIndicator from './NewIndicator'
 
 const Indicators = (props) => {
-
     return (
         <div>
             <h1>Indicators</h1>
-            <NewIndicator addNewIndicator={props.addNewIndicator}/>
+            <NewIndicator 
+            addNewIndicator={props.addNewIndicator}
+            pairForRequest={props.pairForRequest}
+            />
             <hr style={{ width: '60%' }} />
             <Table>
                 <thead>

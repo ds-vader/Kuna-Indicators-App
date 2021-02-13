@@ -27,6 +27,7 @@ const indicatorReducer = (state = initialState, action) => {
                 indicators: state.indicators.concat(action.newIndicator)
                 //indicators: [...state.indicators, action.newIndicator]
             }
+
         default:
             return state;
     }
@@ -63,7 +64,7 @@ export const deleteIndicator = (indicatorId) => {
 export const addNewIndicator = (newIndicator) =>{
     
     //task
-    //get actual start and now values based on pair type
+    //get actual start and current values based on pair type
     //return finished new indicator
     //...
     return (dispatch) =>{

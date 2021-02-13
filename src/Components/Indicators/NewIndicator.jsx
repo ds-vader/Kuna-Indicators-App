@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Modal, Form, Col } from 'react-bootstrap'
 import { ArrowUp, ArrowDown } from 'react-bootstrap-icons';
+import { getCurrentPrice } from '../../API/api'
 
 const NewIndicator = (props) => {
     //all pairs type
@@ -43,7 +44,14 @@ const NewIndicator = (props) => {
     //hooks for get input values
     const [pair, setPair] = useState('BTC - USDT');
     const [type, setType] = useState(true);
+    const [start, setStart] = useState(0)
     const [marker, setMarker] = useState(0);
+
+    //get start price from for some currency pair
+    getCurrentPrice(props.pairForRequest(pair))
+    .then(response => {
+        setStart(response)
+    })
 
     return (
         <>
@@ -65,7 +73,10 @@ const NewIndicator = (props) => {
                             <Form.Label>Choice pair</Form.Label>
                             <Form.Control as="select" custom
                                 value={pair}
-                                onChange={e => { setPair(e.target.value); }}>
+                                onChange={e => {
+                                    setPair(e.target.value);
+
+                                }}>
                                 {
                                     _pairs.map((value) => {
                                         return <option value={value}>{value}</option>
@@ -107,10 +118,12 @@ const NewIndicator = (props) => {
                         Close
                     </Button>
                     <Button variant="primary" onClick={() => {
+
                         props.addNewIndicator(
                             {
                                 date: new Date(),
                                 pair,
+                                start,
                                 marker,
                                 type
                             }
