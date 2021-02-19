@@ -10,7 +10,8 @@ const Indicators = (props) => {
             <h1>Indicators</h1>
             <NewIndicator
                 addNewIndicator={props.addNewIndicator}
-                pairForRequest={props.pairForRequest}
+                pairs={props.pairs}
+                currentData={props.currentData}
             />
             <hr style={{ width: '60%' }} />
             <Table>
@@ -28,7 +29,7 @@ const Indicators = (props) => {
                 </thead>
                 <tbody>
                     { props.indicators.map(i =>
-                        <tr key={i.id}>
+                        <tr key={i.id} id={i.id}>
                             <td>
                                 {i.id}
                             </td>

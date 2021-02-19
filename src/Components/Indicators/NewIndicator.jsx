@@ -4,39 +4,7 @@ import { ArrowUp, ArrowDown } from 'react-bootstrap-icons';
 import { getCurrentPrice } from '../../API/api'
 
 const NewIndicator = (props) => {
-    //all pairs type
-    const _pairs = [
-        'BTC - USDT',
-        'BTC - USD',
-        'BTC - UAH',
-        'BTC - RUB',
-        'ETH - UAH',
-        'ETH - USDT',
-        'ETH - BTC',
-        'ETH - RUB',
-        'XRP - UAH',
-        'XRP - RUB',
-        'USDT - UAH',
-        'USDT - RUB',
-        'KUN - USDT',
-        'BCH - UAH',
-        'EOS - UAH',
-        'XLM - UAH',
-        'LTC - UAH',
-        'DASH - UAH',
-        'ZEC - UAH',
-        'XEM - UAH',
-        'WAVES - UAH',
-        'DREAM - BTC',
-        'DREAM - UAH',
-        'BNB - UAH',
-        'BNB - RUB',
-        'USDC - UAH',
-        'DAI - UAH',
-        'TON - USDT'
-    ]
-
-    //hook for manage window showing
+  
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -82,7 +50,7 @@ const NewIndicator = (props) => {
 
                                 }}>
                                 {
-                                    _pairs.map((value) => {
+                                    props.pairs.map((value) => {
                                         return <option value={value}>{value}</option>
                                     })
                                 }
@@ -125,7 +93,7 @@ const NewIndicator = (props) => {
 
                         props.addNewIndicator(
                             {
-                                date: new Date(),
+                                date: props.currentData(),
                                 pair,
                                 start,
                                 now,

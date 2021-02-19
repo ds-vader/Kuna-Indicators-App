@@ -1,12 +1,16 @@
 import { indicatorAPI } from '../API/api'
+import { kunaAPI } from '../API/api'
 
 // action names
 const SET_INDICATORS = 'SET_INDICATORS';
 const DELETE_INDICATOR = 'DELETE_INDICATOR';
 const ADD_NEW_INDICATOR = 'ADD_NEW_INDICATOR';
 
+const SET_PAIRS = 'SET_PAIRS';
+
 let initialState = {
-    indicators: []
+    indicators: [],
+    pairs: []
 }
 
 //reducer for all indicators actions
@@ -28,6 +32,9 @@ const indicatorReducer = (state = initialState, action) => {
                 //indicators: [...state.indicators, action.newIndicator]
             }
 
+        case SET_PAIRS:
+            return{ ...state, pairs: action.pairs}
+
         default:
             return state;
     }
@@ -37,6 +44,8 @@ const indicatorReducer = (state = initialState, action) => {
 const setIndicators = (indicators) => ({ type: SET_INDICATORS, indicators })
 const deleteIndicatorSuccess = (indicatorId) => ({ type: DELETE_INDICATOR, indicatorId })
 const addNewIndicatorSuccess = (newIndicator) =>({type: ADD_NEW_INDICATOR, newIndicator})
+
+const setPairs = (pairs) => ({type: SET_PAIRS, pairs})
 
 //thunks
 //get indicators thunk
@@ -67,6 +76,20 @@ export const addNewIndicator = (newIndicator) =>{
             .then(response =>{
                 dispatch(addNewIndicatorSuccess(response.data))
             })
+    }
+}
+
+//get pairs
+export const getPairs = () =>{
+    let resultArr = [];
+    return (dispatch) => {
+        kunaAPI.getAllMarkets().then(data => {
+            data.forEach(item =>{
+                let pair = item.base_unit + ' - ' + item.quote_unit
+                resultArr.push(pair.toUpperCase())
+            })
+            dispatch(setPairs(resultArr))
+        })
     }
 }
 

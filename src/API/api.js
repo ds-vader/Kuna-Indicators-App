@@ -45,7 +45,12 @@ export const indicatorAPI = {
 }
 
 export const kunaAPI = {
-
+    getAllMarkets() {
+        return kunaInstance.get('markets')
+        .then(response =>{
+            return response.data
+        })
+    }
 }
 
 //get current price from kuna API
