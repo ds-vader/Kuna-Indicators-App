@@ -7,20 +7,23 @@ import {compose} from 'redux'
 class IndicatorsContainer extends React.Component{
     componentDidMount(){
         this.props.getIndicators();
+        
+        this.ticker = setInterval(() => {
+            //this bad practice, but this method help re-render app with new NOW value
+            this.props.getIndicators();
+          }, 10000);
     }
-
-    pairForRequest = (pair) =>{
-        //prepare info for getCurrentPrice func 
-        return pair.match(/[A-Z]+/gi).join('')
+    
+    componentWillUnmount(){
+        clearInterval(this.ticker)
     }
-
+    
 
     render(){
         return <>
             <Indicators indicators={this.props.indicators}
                         deleteIndicator={this.props.deleteIndicator}
                         addNewIndicator={this.props.addNewIndicator}
-                        pairForRequest={this.pairForRequest}
             />
         </>
     }

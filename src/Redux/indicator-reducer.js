@@ -62,11 +62,6 @@ export const deleteIndicator = (indicatorId) => {
 
 //add indicator thunk
 export const addNewIndicator = (newIndicator) =>{
-    
-    //task
-    //get actual start and current values based on pair type
-    //return finished new indicator
-    //...
     return (dispatch) =>{
         indicatorAPI.addIndicator(newIndicator)
             .then(response =>{

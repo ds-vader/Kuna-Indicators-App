@@ -45,13 +45,17 @@ const NewIndicator = (props) => {
     const [pair, setPair] = useState('BTC - USDT');
     const [type, setType] = useState(true);
     const [start, setStart] = useState(0)
+    const [now, setNow] = useState(0)
     const [marker, setMarker] = useState(0);
 
     //get start price from for some currency pair
-    getCurrentPrice(props.pairForRequest(pair))
-    .then(response => {
-        setStart(response)
-    })
+    if (show === true) {
+        getCurrentPrice(pair)
+            .then(response => {
+                setStart(response)
+                setNow(response)
+            })
+    }
 
     return (
         <>
@@ -124,6 +128,7 @@ const NewIndicator = (props) => {
                                 date: new Date(),
                                 pair,
                                 start,
+                                now,
                                 marker,
                                 type
                             }
