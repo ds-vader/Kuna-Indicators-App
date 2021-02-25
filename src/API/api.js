@@ -5,7 +5,7 @@ instance created by axios
 can add headers, withCredentials etc. 
 */
 const instance = axios.create({
-    baseURL: 'https://my-json-server.typicode.com/twoSad/IndicatorsDB/db'
+    baseURL: 'https://my-json-server.typicode.com/twoSad/IndicatorsDB/'
 });
 
 const kunaInstance = axios.create({
